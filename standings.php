@@ -34,20 +34,20 @@
 
     if ($result->num_rows > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo '<table cellpadding="0" cellspacing="0" class="db-table">';
-            echo "<tr><th>Name</th><th>Costume</th><th>Votes</th></tr>";
+        
+        echo '<table cellpadding="0" cellspacing="0" class="db-table">';
+        echo "<tr><th>Name</th><th>Costume</th><th>Votes</th></tr>";
 
-            while($row = mysqli_fetch_array($result))
-            {
-            echo "<tr>";
-            echo "<td>" . $row['Name'] . "</td>";
-            echo "<td>" . $row['Description'] . "</td>";
-            echo "<td>" . $row['Votes'] . "</td>";
-            echo "</tr>";
-            }
-            echo "</table>";
+        while($row = mysqli_fetch_array($result))
+        {
+        echo "<tr>";
+        echo "<td>" . $row['Name'] . "</td>";
+        echo "<td>" . $row['Description'] . "</td>";
+        echo "<td>" . $row['Votes'] . "</td>";
+        echo "</tr>";
         }
+        echo "</table>";
+
     } else {
         echo "No votes have been cast.";
     }
