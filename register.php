@@ -20,20 +20,24 @@
     
     if(!isset($id) || trim($id) == '' || !isset($name) || trim($name) == '' || !isset($desc) || trim($desc) == '')
     {
-       echo "All entries required. Please go back and try again!";
+        echo "All entries required. Please go back and try again!";
+        exit(1);
     }
     
-    // Check first that the registered number hasn't been registered already
-
-        
     // OK great, register the new contesetant
-    $sql = "INSERT INTO `poll_master` (`ID`, `name`, `desc`) VALUES (" .$id.", ".$name.", ".$desc.")";
+    $sql = "INSERT INTO `poll_master` (`ID`, `name`, `desc`) VALUES (".$id.", '".$name."', '".$desc."');";
     
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
+        echo "New record created successfully. <br><br><a href=\"./index.html\">Back to Main Menu</a>";
+    }
+    elseif($conn->errno == 1062) {
+        echo "This contestant code has already been assigned. Please go back and use a different code!";
+        echo "<br><br><a href=\"./index.html\">Back to Main Menu</a>";
+    }
+    else {
         echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<br><br><a href=\"./index.html\">Back to Main Menu</a>";
     }
 
     $conn->close();
