@@ -21,7 +21,9 @@
     
     if($results = $conn->query($sql_check)) {
         if ($results->num_rows == 0) {
-            echo "Sticker not registered. Vote not cast.<br>";
+            echo '<script type="text/javascript">';
+            echo 'alert("QR Code not registered!")';
+            echo '</script>';
             exit(1);
         }
     }
