@@ -14,20 +14,14 @@
     }
     
     // Harvest GET inputs from QR code
-    $id = (int)$_GET["ID"];
-    
-    if(!isset($id) || trim($id) == '')
-    {
-       echo "Error in QR scan; vote not cast.";
-    }
-    
+    $id = intval(htmlspecialchars($_GET["id"]));
         
     // Check that ID is actually registered
     $sql_check = "SELECT * from `poll_master` WHERE ID = ".$id.";";
     
     if($results = $conn->query($sql_check)) {
         if ($results->num_rows == 0) {
-            echo "Sticker not registered. Vote not cast.";
+            echo "Sticker not registered. Vote not cast.<br>";
             exit(1);
         }
     }
@@ -40,7 +34,9 @@
     $sql = "INSERT INTO `upvotes` (`ID`, `votes`) VALUES (".$id.", 1);";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Upvoted!";
+        echo '<script type="text/javascript">';
+        echo 'alert("Upvoted!")';
+        echo '</script>';
     }
     else {
         echo "Error: " . $sql . "<br>" . $conn->error;

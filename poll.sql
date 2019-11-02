@@ -21,6 +21,3 @@ CREATE TABLE `upvotes` (
 
 INSERT INTO `upvotes` (`ID`, `votes`) VALUES
 (1, 1);
-
-ALTER TABLE `upvotes`
-  ADD PRIMARY KEY (`ID`);
